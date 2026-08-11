@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#075E54">
+
+    <meta name="description"
+          content="Medical QR Pro - dossier médical, QR Code et rendez-vous">
+
+    <link rel="manifest"
+          href="manifest.json">
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <title>SAMA QR 
+
+    </title>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="brand-icon">✚</div>
+
+        <div>
+            <strong>SAMA QR</strong>
+            <span></span>
+        </div>
+    </div>
+
+    <button id="logoutButton"
+            class="logout hidden">
+        Déconnexion
+    </button>
+
+</header>
+
+
+<main>
+
+<!-- =========================
+     AUTHENTIFICATION
+========================= -->
+
+<section id="authScreen"
+         class="screen">
+
+    <div class="hero">
+
+        <div class="medical-icon">
+            🏥
+        </div>
+
+        <h1>
+            Votre santé,<br>
+            toujours avec vous.
+        </h1>
+
+        <p>
+            Créez votre profil médical et obtenez
+            votre QR Code personnel.
+        </p>
+
+    </div>
+
+
+    <div class="auth-card">
+
+        <div class="tabs">
+
+            <button id="loginTab"
+                    class="tab active">
+                Connexion
+            </button>
+
+            <button id="registerTab"
+                    class="tab">
+                Créer un compte
+            </button>
+
+        </div>
+
+
+        <form id="authForm">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="exemple@email.com"
+                required>
+
+
+            <label>Mot de passe</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Minimum 6 caractères"
+                minlength="6"
+                required>
+
+
+            <button
+                type="submit"
+                class="primary-button"
+                id="authButton">
+
+                Se connecter
+
+            </button>
+
+        </form>
+
+        <p id="authMessage"
+           class="message"></p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     APPLICATION
+========================= -->
+
+<section id="appScreen"
+         class="screen hidden">
+
+    <div class="container">
+
+        <div class="welcome">
+
+            <div>
+
+                <small>
+                    ESPACE PERSONNEL
+                </small>
+
+                <h1 id="welcomeName">
+                    Bonjour
+                </h1>
+
+            </div>
+
+            <div class="avatar">
+                👤
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="menu">
+
+            <button class="menu-button active"
+                    data-page="profilePage">
+                👤
+                <span>Profil</span>
+            </button>
+
+            <button class="menu-button"
+                    data-page="qrPage">
+                ▦
+                <span>Mon QR</span>
+            </button>
+
+            <button class="menu-button"
+                    data-page="appointmentsPage">
+                📅
+                <span>Rendez-vous</span>
+            </button>
+
+            <button class="menu-button"
+                    data-page="paymentPage">
+                💳
+                <span>Paiement</span>
+            </button>
+
+        </nav>
+
+
+        <!-- =========================
+             PROFIL
+        ========================== -->
+
+        <div id="profilePage"
+             class="page">
+
+            <div class="section-title">
+
+                <div>
+                    <small>
+                        DOSSIER MÉDICAL
+                    </small>
+
+                    <h2>
+                        Mon profil
+                    </h2>
+                </div>
+
+                <span class="secure">
+                    🔒 Protégé
+                </span>
+
+            </div>
+
+
+            <form id="profileForm"
+                  class="card">
+
+                <div class="form-grid">
+
+                    <div>
+                        <label>Nom complet</label>
+
+                        <input
+                            id="fullName"
+                            required>
+                    </div>
+
+
+                    <div>
+                        <label>Groupe sanguin</label>
+
+                        <select id="bloodGroup">
+
+                            <option value="">
+                                Non renseigné
+                            </option>
+
+                            <option>A+">A+</option>
+                            <option>A-">A-</option>
+                            <option>B+">B+</option>
+                            <option>B-">B-</option>
+                            <option>AB+">AB+</option>
+                            <option>AB-">AB-</option>
+                            <option>O+">O+</option>
+                            <option>O-">O-</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="full">
+
+                        <label>Allergies</label>
+
+                        <textarea
+                            id="allergies"
+                            placeholder="Ex : pénicilline, arachides...">
+                        </textarea>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Contact d'urgence</label>
+
+                        <input
+                            id="emergencyName"
+                            placeholder="Nom complet">
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Téléphone d'urgence</label>
+
+                        <input
+                            id="emergencyPhone"
+                            type="tel"
+                            placeholder="+221...">
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Quartier</label>
+
+                        <input id="district">
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Profession</label>
+
+                        <input id="profession">
+
+                    </div>
+
+
+                    <div class="full">
+
+                        <label>
+                            Informations médicales importantes
+                        </label>
+
+                        <textarea
+                            id="medicalNotes"
+                            placeholder="Informations importantes pour les professionnels de santé...">
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button">
+
+                    Enregistrer mon profil
+
+                </button>
+
+                <p id="profileMessage"
+                   class="message"></p>
+
+            </form>
+
+        </div>
+
+
+        <!-- =========================
+             QR CODE
+        ========================== -->
+
+        <div id="qrPage"
+             class="page hidden">
+
+            <div class="section-title">
+
+                <div>
+
+                    <small>
+                        IDENTIFICATION
+                    </small>
+
+                    <h2>
+                        Mon QR Code
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="qr-card">
+
+                <div class="qr-security">
+                    🔐 QR Code sécurisé
+                </div>
+
+                <div id="qrcode"></div>
+
+                <h3>
+                    Votre QR Code médical
+                </h3>
+
+                <p>
+                    Ce QR Code permet d'identifier
+                    votre dossier médical.
+                </p>
+
+                <button
+                    id="downloadQR"
+                    class="primary-button">
+
+                    Télécharger mon QR
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             RENDEZ-VOUS
+        ========================== -->
+
+        <div id="appointmentsPage"
+             class="page hidden">
+
+            <div class="section-title">
+
+                <div>
+
+                    <small>
+                        CONSULTATIONS
+                    </small>
+
+                    <h2>
+                        Rendez-vous
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form id="appointmentForm"
+                  class="card">
+
+                <label>Nom du médecin</label>
+
+                <input
+                    id="doctorName"
+                    placeholder="Dr. Exemple"
+                    required>
+
+
+                <label>Date</label>
+
+                <input
+                    type="date"
+                    id="appointmentDate"
+                    required>
+
+
+                <label>Heure</label>
+
+                <input
+                    type="time"
+                    id="appointmentTime"
+                    required>
+
+
+                <label>Motif</label>
+
+                <textarea
+                    id="appointmentReason"
+                    placeholder="Motif du rendez-vous">
+                </textarea>
+
+
+                <button
+                    class="primary-button"
+                    type="submit">
+
+                    Demander le rendez-vous
+
+                </button>
+
+                <p id="appointmentMessage"
+                   class="message"></p>
+
+            </form>
+
+
+            <div class="card">
+
+                <h3>
+                    Mes rendez-vous
+                </h3>
+
+                <div id="appointmentsList">
+
+                    <p class="empty">
+                        Aucun rendez-vous.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PAIEMENT
+        ========================== -->
+
+        <div id="paymentPage"
+             class="page hidden">
+
+            <div class="section-title">
+
+                <div>
+
+                    <small>
+                        PAIEMENT
+                    </small>
+
+                    <h2>
+                        Mes paiements
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="payment-card">
+
+                <h3>
+                    Consultation médicale
+                </h3>
+
+                <div class="price">
+                    5 000 FCFA
+                </div>
+
+                <p>
+                    Sélectionnez votre moyen de paiement.
+                </p>
+
+
+                <div class="payment-methods">
+
+                    <button
+                        class="payment-method"
+                        data-method="wave">
+
+                        🟦
+                        <span>Wave</span>
+
+                    </button>
+
+
+                    <button
+                        class="payment-method"
+                        data-method="orange-money">
+
+                        🟧
+                        <span>Orange Money</span>
+
+                    </button>
+
+
+                    <button
+                        class="payment-method"
+                        data-method="card">
+
+                        💳
+                        <span>Carte bancaire</span>
+
+                    </button>
+
+                </div>
+
+
+                <button
+                    id="payButton"
+                    class="primary-button"
+                    disabled>
+
+                    Choisir un moyen de paiement
+
+                </button>
+
+                <p id="paymentMessage"
+                   class="message"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Medical QR Pro © 2026
+    </p>
+
+    <small>
+        Vos données médicales sont sensibles.
+    </small>
+
+</footer>
+
+
+<!-- QR CODE -->
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+</script>
+
+
+<!-- APPLICATION -->
+
+<script
+type="module"
+src="app.js">
+</script>
+
+</body>
+</html>
